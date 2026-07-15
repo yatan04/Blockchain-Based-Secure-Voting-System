@@ -1,0 +1,101 @@
+============================================================
+🔐 LOGIN (Admin or Voter)
+============================================================
+
+# Admin Login
+curl -X POST http://localhost:5000/login \
+    -H "Content-Type: application/json" \
+    -d "{\"user_id\":\"admin\", \"password\":\"admin123\"}"
+
+# Voter Login (replace V001 with actual voter_id and PIN)
+curl -X POST http://localhost:5000/login \
+    -H "Content-Type: application/json" \
+    -d "{\"user_id\":\"V001\", \"password\":\"1234\"}"
+
+
+============================================================
+🧍 REGISTER A VOTER (returns a 4-digit PIN)
+============================================================
+
+curl -X POST http://localhost:5000/register_voter \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V001\",\"name\":\"John Doe\",\"email\":\"john@example.com\"}"
+
+curl -X POST http://localhost:5000/register_voter \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V002\",\"name\":\"Joe Doe\",\"email\":\"joe@example.com\"}"
+
+curl -X POST http://localhost:5000/register_voter \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V003\",\"name\":\"Jon Doe\",\"email\":\"jon@example.com\"}"
+
+
+============================================================
+🎭 REGISTER A CANDIDATE (Admin Only)
+============================================================
+
+curl -X POST http://localhost:5000/register_candidate \
+    -H "Content-Type: application/json" \
+    -d "{\"candidate_id\":\"C004\",\"name\":\"Ali Johnson\",\"party\":\"Demo Party\"}"
+
+
+============================================================
+🗳 CAST A VOTE (Voter Only)
+============================================================
+
+curl -X POST http://localhost:5000/cast_vote \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V001\",\"candidate_id\":\"C001\"}"
+
+curl -X POST http://localhost:5000/cast_vote \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V002\",\"candidate_id\":\"C002\"}"
+
+curl -X POST http://localhost:5000/cast_vote \
+    -H "Content-Type: application/json" \
+    -d "{\"voter_id\":\"V003\",\"candidate_id\":\"C002\"}"
+
+
+============================================================
+⛏ MINE PENDING VOTES INTO BLOCKCHAIN (Admin Only)
+============================================================
+
+curl http://localhost:5000/mine_block
+
+
+============================================================
+🔗 VIEW BLOCKCHAIN (Admin Only)
+============================================================
+
+curl http://localhost:5000/get_chain
+
+
+============================================================
+📊 VIEW ELECTION RESULTS
+============================================================
+
+curl http://localhost:5000/get_results
+
+
+============================================================
+🛡 VALIDATE BLOCKCHAIN INTEGRITY (Admin Only)
+============================================================
+
+curl http://localhost:5000/validate_chain
+
+
+============================================================
+📄 EXPORT RESULTS AS PDF (Saves election_results.pdf)
+============================================================
+
+curl http://localhost:5000/export_pdf
+
+
+============================================================
+💾 DATABASE-INTEGRATED BLOCKCHAIN (NEW)
+============================================================
+
+# View stored blocks (via normal endpoint)
+curl http://localhost:5000/get_chain
+
+# Blocks, voters, and candidates persist via SQLite (voting.db)
